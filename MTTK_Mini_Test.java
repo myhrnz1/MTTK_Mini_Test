@@ -54,6 +54,18 @@ public class MTTK_Mini_Test {
     return (create.tryCreate() == true);
   }
 
+  public static boolean testTryCreateAddsMTTK_UsersToUserList() {
+    MTTK_Create create = new MTTK_Create();
+    create.tempUsername = "abc";
+    create.tempPassword = "123"
+    create.usernameIsValid = true;
+    create.usernameIsValid = true;
+    MTTK_Users.setStateEmptyUsersList();
+    create.tryCreate()
+    return (MTTK_Users.usersList.get(0).username == "abc" &&
+            MTTK_Users.usersList.get(0).password == "123");
+  }
+
   public static void main(String[] args) {
     if (testMTTK_Create_StartValueOftempUsername()){
       System.out.println("PASSED" + ": testMMTK_Create_StartValueOfTempUsernem()");
