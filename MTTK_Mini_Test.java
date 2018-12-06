@@ -33,8 +33,16 @@ public class MTTK_Mini_Test {
 
   public static boolean testVariablesAfterUsingValidUsernameInTryUsername() {
     MTTK_Create create = new MTTK_Create();
+    MTTK_Users.setStateEmptyUsersList();
     create.tryUsername("abc");
     return (create.tempUsername == "abc" && create.usernameIsValid == true);
+  }
+
+  public static boolean testVariablesAfterUsingInValidUsernameInTryUsername() {
+    MTTK_Create create = new MTTK_Create();
+    MTTK_Users.addMTTK_User("abc","123");
+    create.tryUsername("abc");
+    return (create.tempUsername == "" && create.usernameIsValid == false);
   }
 
   public static void main(String[] args) {
@@ -77,7 +85,13 @@ public class MTTK_Mini_Test {
     if (testVariablesAfterUsingValidUsernameInTryUsername()){
       System.out.println("PASSED" + ": testVariablesAfterUsingValidUsernameInTryUsername()");
     } else {
-      System.out.println("FAILED" + ": testVariablesAfterUsingValidUsernameInTryUsername())");
+      System.out.println("FAILED" + ": testVariablesAfterUsingValidUsernameInTryUsername()");
+    }
+
+    if (testVariablesAfterUsingInValidUsernameInTryUsername()){
+      System.out.println("PASSED" + ": testVariablesAfterUsingInValidUsernameInTryUsername()");
+    } else {
+      System.out.println("FAILED" + ": testVariablesAfterUsingInValidUsernameInTryUsername()");
     }
   }
 }
