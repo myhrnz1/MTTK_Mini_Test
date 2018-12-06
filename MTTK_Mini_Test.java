@@ -45,6 +45,15 @@ public class MTTK_Mini_Test {
     return (create.tempUsername == "" && create.usernameIsValid == false);
   }
 
+  public static boolean testTryCreateReturnsTrueWhenValidVariables() {
+    MTTK_Create create = new MTTK_Create();
+    create.tempUsername = "abc";
+    create.tempPassword = "123"
+    create.usernameIsValid = true;
+    create.usernameIsValid = true;
+    return (create.tryCreate() == true);
+  }
+
   public static void main(String[] args) {
     if (testMTTK_Create_StartValueOftempUsername()){
       System.out.println("PASSED" + ": testMMTK_Create_StartValueOfTempUsernem()");
