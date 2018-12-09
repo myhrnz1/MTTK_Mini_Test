@@ -133,7 +133,108 @@ public class MTTK_Mini_Test {
     return (false == login.checkPassword("321"));
   }
 
+  public static boolean testAddMTTK_User() {
+    MTTK_Users.setStateEmptyUsersList();
+    MTTK_Users.addMTTK_User("abc","123");
+    return (MTTK_Users.usersList.size() == 1);
+  }
+
+  public static boolean testSetStateEmptyUsersList() {
+    MTTK_Users.addMTTK_User("abc","123");
+    MTTK_Users.setStateEmptyUsersList();
+    return (MTTK_Users.usersList.size() == 0);
+  }
+
+  public static boolean testIndexOfInvalidUsernameWhenUsersListIsEmtpy() {
+    MTTK_Users.setStateEmptyUsersList();
+    return 0 == MTTK_Users.indexOfUser("abc");
+  }
+
+  public static boolean testIndexOfInvalidUsernameWhenUsersListIsNonEmpty() {
+    MTTK_Users.setStateEmptyUsersList();
+    MTTK_Users.addMTTK_User("abc","123");
+    return 1 == MTTK_Users.indexOfUser("cab");
+  }
+
+  public static boolean testIndexOfValidUsername() {
+    MTTK_Users.setStateEmptyUsersList();
+    MTTK_Users.addMTTK_User("abc","123");
+    MTTK_Users.addMTTK_User("bca","123");
+    MTTK_Users.addMTTK_User("cab","123");
+    return 1 == MTTK_Users.indexOfUser("bca");
+  }
+
+  public static boolean testPasswordOfUserWhenUsernameIsValid() {
+    MTTK_Users.setStateEmptyUsersList();
+    MTTK_Users.addMTTK_User("abc","123");
+    MTTK_Users.addMTTK_User("bca","123");
+    MTTK_Users.addMTTK_User("cab","123");
+    return "123" == MTTK_Users.passwordOfUser("bca");
+  }
+
+  public static boolean testPasswordOfUserWhenUsernameIsInValidWhenUsersListIsEmpty() {
+    MTTK_Users.setStateEmptyUsersList();
+    return "-1" == MTTK_Users.passwordOfUser("abc");
+  }
+
+  public static boolean testPasswordOfUserWhenUsernameIsInValidWhenUsersListIsNonEmpty() {
+    MTTK_Users.setStateEmptyUsersList();
+    MTTK_Users.addMTTK_User("abc","123");
+    MTTK_Users.addMTTK_User("bca","123");
+    return "-1" == MTTK_Users.passwordOfUser("cab");
+  }
+
   public static void main(String[] args) {
+    System.out.println("\nTest MTTK_Users:");
+
+    if (testAddMTTK_User()){
+      System.out.println("PASSED" + ": testAddMTTK_User()");
+    } else {
+      System.out.println("FAILED" + ": testAddMTTK_User()");
+    }
+
+    if (testSetStateEmptyUsersList()){
+      System.out.println("PASSED" + ": testSetStateEmptyUsersList()");
+    } else {
+      System.out.println("FAILED" + ": testSetStateEmptyUsersList()");
+    }
+
+    if (testIndexOfInvalidUsernameWhenUsersListIsEmtpy()){
+      System.out.println("PASSED" + ": testIndexOfInvalidUsernameWhenUsersListIsEmtpy()");
+    } else {
+      System.out.println("FAILED" + ": testIndexOfInvalidUsernameWhenUsersListIsEmtpy()");
+    }
+
+    if (testIndexOfInvalidUsernameWhenUsersListIsNonEmpty()){
+      System.out.println("PASSED" + ": testIndexOfInvalidUsernameWhenUsersListIsNonEmpty()");
+    } else {
+      System.out.println("FAILED" + ": testIndexOfInvalidUsernameWhenUsersListIsNonEmpty()");
+    }
+
+    if (testIndexOfValidUsername()){
+      System.out.println("PASSED" + ": testIndexOfValidUsername()");
+    } else {
+      System.out.println("FAILED" + ": testIndexOfValidUsername()");
+    }
+
+    if (testPasswordOfUserWhenUsernameIsValid()){
+      System.out.println("PASSED" + ": testPasswordOfUserWhenUsernameIsValid()");
+    } else {
+      System.out.println("FAILED" + ": testPasswordOfUserWhenUsernameIsValid()");
+    }
+
+    if (testPasswordOfUserWhenUsernameIsInValidWhenUsersListIsEmpty()){
+      System.out.println("PASSED" + ": testPasswordOfUserWhenUsernameIsInValidWhenUsersListIsEmpty()");
+    } else {
+      System.out.println("FAILED" + ": testPasswordOfUserWhenUsernameIsInValidWhenUsersListIsEmpty()");
+    }
+
+    if (testPasswordOfUserWhenUsernameIsInValidWhenUsersListIsNonEmpty()){
+      System.out.println("PASSED" + ": testPasswordOfUserWhenUsernameIsInValidWhenUsersListIsNonEmpty()");
+    } else {
+      System.out.println("FAILED" + ": testPasswordOfUserWhenUsernameIsInValidWhenUsersListIsNonEmpty()");
+    }
+
     System.out.println("\nTest MTTK_Login:");
 
     if (testCheckPasswordAfterUsingIncorrectPasswordInCheckUsername()){
