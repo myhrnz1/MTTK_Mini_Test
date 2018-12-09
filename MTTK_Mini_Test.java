@@ -65,7 +65,126 @@ public class MTTK_Mini_Test {
             MTTK_Users.usersList.get(0).password == "123");
   }
 
+  public static boolean testMTTK_Login_StartValues() {
+    MTTK_Login login = new MTTK_Login();
+    return login.tempUsername.equals("") && login.usernameIsValid == false;
+  }
+
+  public static boolean testInValidUsernameIncheckUsername() {
+    MTTK_Login login = new MTTK_Login();
+    MTTK_Users.setStateEmptyUsersList();
+    return false == login.checkUsername("abc");
+  }
+
+  public static boolean testValidUsernameIncheckUsername() {
+    MTTK_Login login = new MTTK_Login();
+    MTTK_Users.setStateEmptyUsersList();
+    MTTK_Create create = new MTTK_Create();
+    create.tryUsername("abc");
+    create.tryPassword("123");
+    create.tryCreate();
+    return true == login.checkUsername("abc");
+  }
+
+  public static boolean testVariablesAfterUsingInValidUsernameInCheckUsername() {
+    MTTK_Login login = new MTTK_Login();
+    MTTK_Users.setStateEmptyUsersList();
+    login.checkUsername("abc");
+    return (login.tempUsername == "" && !login.usernameIsValid);
+  }
+
+  public static boolean testVariablesAfterUsingValidUsernameInCheckUsername() {
+    MTTK_Login login = new MTTK_Login();
+    MTTK_Users.setStateEmptyUsersList();
+    MTTK_Create create = new MTTK_Create();
+    create.tryUsername("abc");
+    create.tryPassword("123");
+    create.tryCreate();
+    login.checkUsername("abc");
+    return (login.tempUsername == "abc" && login.usernameIsValid);
+  }
+
+  public static boolean testCheckPasswordAfterUsingInvalidUsernameInCheckUsername() {
+    MTTK_Login login = new MTTK_Login();
+    MTTK_Users.setStateEmptyUsersList();
+    login.checkUsername("abc");
+    return (false == login.checkPassword("123"));
+  }
+
+  public static boolean testCheckPasswordAfterUsingCorrectPasswordInCheckUsername() {
+    MTTK_Login login = new MTTK_Login();
+    MTTK_Users.setStateEmptyUsersList();
+    MTTK_Create create = new MTTK_Create();
+    create.tryUsername("abc");
+    create.tryPassword("123");
+    create.tryCreate();
+    login.checkUsername("abc");
+    return (true == login.checkPassword("123"));
+  }
+
+  public static boolean testCheckPasswordAfterUsingIncorrectPasswordInCheckUsername() {
+    MTTK_Login login = new MTTK_Login();
+    MTTK_Users.setStateEmptyUsersList();
+    MTTK_Create create = new MTTK_Create();
+    create.tryUsername("abc");
+    create.tryPassword("123");
+    create.tryCreate();
+    login.checkUsername("abc");
+    return (false == login.checkPassword("321"));
+  }
+
   public static void main(String[] args) {
+    System.out.println("\nTest MTTK_Login:");
+
+    if (testCheckPasswordAfterUsingIncorrectPasswordInCheckUsername()){
+      System.out.println("PASSED" + ": testCheckPasswordAfterUsingIncorrectPasswordInCheckUsername()");
+    } else {
+      System.out.println("FAILED" + ": testCheckPasswordAfterUsingIncorrectPasswordInCheckUsername()");
+    }
+
+    if (testCheckPasswordAfterUsingCorrectPasswordInCheckUsername()){
+      System.out.println("PASSED" + ": testCheckPasswordAfterUsingCorrectPasswordInCheckUsername()");
+    } else {
+      System.out.println("FAILED" + ": testCheckPasswordAfterUsingCorrectPasswordInCheckUsername()");
+    }
+
+    if (testCheckPasswordAfterUsingInvalidUsernameInCheckUsername()){
+      System.out.println("PASSED" + ": testCheckPasswordAfterUsingInvalidUsernameInCheckUsername())");
+    } else {
+      System.out.println("FAILED" + ": testCheckPasswordAfterUsingInvalidUsernameInCheckUsername()");
+    }
+
+    if (testVariablesAfterUsingInValidUsernameInCheckUsername()){
+      System.out.println("PASSED" + ": testVariablesAfterUsingInValidUsernameInCheckUsername()");
+    } else {
+      System.out.println("FAILED" + ": testVariablesAfterUsingInValidUsernameInCheckUsername()");
+    }
+
+    if (testVariablesAfterUsingValidUsernameInCheckUsername()){
+      System.out.println("PASSED" + ": testVariablesAfterUsingValidUsernameInCheckUsername()");
+    } else {
+      System.out.println("FAILED" + ": testVariablesAfterUsingValidUsernameInCheckUsername()");
+    }
+
+    if (testValidUsernameIncheckUsername()){
+      System.out.println("PASSED" + ": testValidUsernameIncheckUsername()");
+    } else {
+      System.out.println("FAILED" + ": testValidUsernameIncheckUsername()");
+    }
+
+    if (testInValidUsernameIncheckUsername()){
+      System.out.println("PASSED" + ": testInValidUsernameIncheckUsername()");
+    } else {
+      System.out.println("FAILED" + ": testInValidUsernameIncheckUsername()");
+    }
+
+      if (testMTTK_Login_StartValues()){
+        System.out.println("PASSED" + ": testMTTK_Login_StartValues()");
+      } else {
+        System.out.println("FAILED" + ": testMTTK_Login_StartValues()");
+      }
+
+    System.out.println("\nTest MTTK_Create:");
     if (testMTTK_Create_StartValueOftempUsername()){
       System.out.println("PASSED" + ": testMMTK_Create_StartValueOfTempUsernem()");
     } else {
